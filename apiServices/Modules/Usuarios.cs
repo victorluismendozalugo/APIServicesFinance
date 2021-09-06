@@ -93,7 +93,7 @@ namespace apiServices.Modules
                 if (r.Data.CodigoError == 0)
                 {
                     Emailer email = new Emailer();
-                    email.EnviarEmail(p.Usuario);
+                    email.EnviarEmail(p.Usuario, r.Message);
                 }
 
                 return Response.AsJson(new Result<DataModel>()

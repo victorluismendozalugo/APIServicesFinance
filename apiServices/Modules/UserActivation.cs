@@ -41,7 +41,7 @@ namespace apiServices.Modules
             //this.RequiresAuthentication();
             _DAUsuario = new DAUsuario();
 
-            Get("/user/{Usuario}", _ => activarUsuario());
+            Get("/user{guid}", _ => activarUsuario());
 
             //Get("/user", _ => "Received GET request");
 
@@ -50,9 +50,11 @@ namespace apiServices.Modules
 
         private object activarUsuario()
         {
+
             try
             {
-                var r = this.Bind<UsuarioRegistroModel>();
+                string r = this.Request.Query["guid"];
+                r.ToString().Replace('{', ' ').Replace('}', ' ');
                 return r;
 
             }
