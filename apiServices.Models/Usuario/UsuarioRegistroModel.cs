@@ -21,4 +21,9 @@
         public int SucursalID { get; set; }
         public int RolID { get; set; }
     }
+    public class ActivacionUsuario
+    {
+        public string guid { get; set; }
+        public int sucursal { get; set; }
+    }
 }

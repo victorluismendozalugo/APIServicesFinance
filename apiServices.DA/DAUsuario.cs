@@ -235,13 +235,13 @@ namespace apiServices.DA
             }
         }
 
-        public Result<DataModel> ActivarUsuario(int usuario, int sucursal)
+        public Result<DataModel> ActivarUsuario(ActivacionUsuario activacion)
         {
             var parametros = new ConexionParameters();
             try
             {
-                parametros.Add("@pIDUsuario", ConexionDbType.Int, usuario);
-                parametros.Add("@pIDSucursal", ConexionDbType.Int, sucursal);
+                parametros.Add("@pGUID", ConexionDbType.VarChar, activacion.guid);
+                parametros.Add("@pSucursalID", ConexionDbType.Int, activacion.sucursal);
                 parametros.Add("@pResultado", ConexionDbType.Bit, System.Data.ParameterDirection.Output);
                 parametros.Add("@pMsg", ConexionDbType.VarChar, System.Data.ParameterDirection.Output, 300);
                 parametros.Add("@pCodError", ConexionDbType.Int, System.Data.ParameterDirection.Output);
@@ -266,6 +266,47 @@ namespace apiServices.DA
                 {
                     Value = false,
                     Message = "Problemas al activar el usuario",
+                    Data = new DataModel()
+                    {
+                        CodigoError = 101,
+                        MensajeBitacora = ex.Message,
+                        Data = ""
+                    }
+                };
+            }
+        }
+
+        public Result<DataModel> UsuarioEnviarEmail(UsuarioRegistroModel usuario)
+        {
+            var parametros = new ConexionParameters();
+            try
+            {
+                parametros.Add("@pUsuario", ConexionDbType.VarChar, usuario.Usuario);
+                parametros.Add("@pSucursalID", ConexionDbType.Int, usuario.SucursalID);
+                parametros.Add("@pResultado", ConexionDbType.Bit, System.Data.ParameterDirection.Output);
+                parametros.Add("@pMsg", ConexionDbType.VarChar, System.Data.ParameterDirection.Output, 300);
+                parametros.Add("@pCodError", ConexionDbType.Int, System.Data.ParameterDirection.Output);
+
+                var r = _conexion.Execute("procUsuariosNuevoCorreo", parametros);
+
+                return new Result<DataModel>()
+                {
+                    Value = parametros.Value("@pResultado").ToBoolean(),
+                    Message = parametros.Value("@pMsg").ToString(),
+                    Data = new DataModel()
+                    {
+                        CodigoError = parametros.Value("@pCodError").ToInt32(),
+                        MensajeBitacora = parametros.Value("@pMsg").ToString(),
+                        Data = r.Data
+                    }
+                };
+            }
+            catch (Exception ex)
+            {
+                return new Result<DataModel>()
+                {
+                    Value = false,
+                    Message = "Problemas al enviar el correo elctrónico",
                     Data = new DataModel()
                     {
                         CodigoError = 101,

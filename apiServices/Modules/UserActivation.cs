@@ -41,7 +41,7 @@ namespace apiServices.Modules
             //this.RequiresAuthentication();
             _DAUsuario = new DAUsuario();
 
-            Get("/user{guid}", _ => activarUsuario());
+            Get("/user", _ => activarUsuario());
 
             //Get("/user", _ => "Received GET request");
 
@@ -50,53 +50,16 @@ namespace apiServices.Modules
 
         private object activarUsuario()
         {
-
             try
             {
-                string r = this.Request.Query["guid"];
-                r.ToString().Replace('{', ' ').Replace('}', ' ');
-                return r;
-
+                ActivacionUsuario p = this.Bind();
+                var r = _DAUsuario.ActivarUsuario(p);
+                return r.Data.MensajeBitacora;
             }
             catch (Exception ex)
             {
-
-                return ex.ToString();
+                return "Problemas al consultar la url solicitada";
             }
-
-            //try
-            //{
-            //    UsuarioRegistroModel p = this.Bind();
-
-            //    var r = _DAUsuario.ActivarUsuario(1, 1);
-
-            //    return Response.AsJson(new Result<DataModel>()
-            //    {
-            //        Value = r.Value,
-            //        Message = r.Message,
-            //        Data = new DataModel()
-            //        {
-            //            CodigoError = r.Data.CodigoError,
-            //            MensajeBitacora = r.Data.MensajeBitacora,
-            //            Data = r.Data.Data
-            //        }
-            //    });
-            //}
-            //catch (Exception ex)
-            //{
-            //    return Response.AsJson(new Result<DataModel>()
-            //    {
-            //        Value = false,
-            //        Message = "Problemas al consultar la url solicitada",
-            //        Data = new DataModel()
-            //        {
-            //            CodigoError = 101,
-            //            MensajeBitacora = ex.Message,
-            //            Data = ""
-            //        }
-            //    });
-            //}
         }
-
     }
 }

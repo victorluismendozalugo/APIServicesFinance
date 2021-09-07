@@ -358,17 +358,6 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
-
-WebSites/bin/ServerConnections.xml
-apiQuiroga/bin/Config.xml
-apiQuiroga/dll/dll.rar
-apiQuiroga/dll/config.xml
-*.dll
-*.xml
-*.rar
-obj/Debug/DesignTimeResolveAssemblyReferencesInput.cache
-obj
-FodyWeavers.xsd
 *.config
 WebSites/bin/ServerConnections.xml
 apiQuiroga/bin/Config.xml
@@ -385,4 +374,3 @@ Bin/
 *.user
 *.vspscc
 *.vssscc
-*.sln
