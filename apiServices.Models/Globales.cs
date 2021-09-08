@@ -79,6 +79,7 @@ namespace apiServices.Models
                 new Claim(JwtRegisteredClaimNames.Sub, usuario.Usuario),
                 new Claim("idUsuario", usuario.IdUsuario.ToString()),
                 new Claim("usuario", usuario.Usuario),
+                new Claim("rolUsuario", usuario.RolID.ToString()),
                 new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
                 new Claim(JwtRegisteredClaimNames.Iat, now.ToUniversalTime().ToString(), ClaimValueTypes.Integer64)
             };

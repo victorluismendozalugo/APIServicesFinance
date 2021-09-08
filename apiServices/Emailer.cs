@@ -31,7 +31,7 @@ namespace apiServices
             msg.Subject = "FinanceApp, activación de cuenta";
             msg.IsBodyHtml = true;
             msg.Body += "<h1> FinanceAPP </a></h1>";
-            msg.Body += "<p><h3>Para habilitar su cuenta haga click en el botón de abajo</h3></p>";
+            msg.Body += "<p><h3>Para habilitar su cuenta haga click en el boton de abajo</h3></p>";
 
             msg.Body += "<td valign='top' align='left' width='630'>";
             msg.Body += "<div style='margin:0;outline:none;padding:0;text-align:center'>";

@@ -57,10 +57,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DACatalogos.cs" />
-    <Compile Include="DACitas.cs" />
-    <Compile Include="DAMovimientos.cs" />
-    <Compile Include="DAReportes.cs" />
+    <Compile Include="DADocumentacion.cs" />
     <Compile Include="DAUsuario.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">

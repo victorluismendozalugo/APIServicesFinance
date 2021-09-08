@@ -32,6 +32,7 @@ namespace apiServices.DA
                 {
                     r.IdUsuario = row["IdUsuario"].ToInt32();
                     r.Usuario = row["Usuario"].ToString();
+                    r.RolID = row["RolID"].ToInt32();
                 });
 
                 return new Result<DataModel>()

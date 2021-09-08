@@ -36,7 +36,7 @@ namespace apiServices.Modules
                 }
             };
 
-            //this.RequiresAuthentication();
+             this.RequiresAuthentication();
             _DAUsuario = new DAUsuario();
 
             Post("/menu", _ => Menu());
