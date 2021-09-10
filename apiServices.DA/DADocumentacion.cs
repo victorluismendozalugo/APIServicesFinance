@@ -105,5 +105,45 @@ namespace apiServices.DA
                 };
             }
         }
+        public Result<DataModel> ConsultaClientesDocumentacion(string usuario, int sucursal)
+        {
+            var parametros = new ConexionParameters();
+            try
+            {
+                parametros.Add("@pUsuario", ConexionDbType.VarChar, usuario);
+                parametros.Add("@pSucursal", ConexionDbType.Int, sucursal);
+                parametros.Add("@pResultado", ConexionDbType.Bit, System.Data.ParameterDirection.Output);
+                parametros.Add("@pMsg", ConexionDbType.VarChar, System.Data.ParameterDirection.Output, 300);
+                parametros.Add("@pCodError", ConexionDbType.Int, System.Data.ParameterDirection.Output);
+
+                var r = _conexion.ExecuteWithResults<DocumentacionModel>("procClientesDocumentacionCon", parametros);
+
+                return new Result<DataModel>()
+                {
+                    Value = parametros.Value("@pResultado").ToBoolean(),
+                    Message = parametros.Value("@pMsg").ToString(),
+                    Data = new DataModel()
+                    {
+                        CodigoError = parametros.Value("@pCodError").ToInt32(),
+                        MensajeBitacora = parametros.Value("@pMsg").ToString(),
+                        Data = r.Data
+                    }
+                };
+            }
+            catch (Exception ex)
+            {
+                return new Result<DataModel>()
+                {
+                    Value = false,
+                    Message = "Problemas al obtener la documentación de los clientes",
+                    Data = new DataModel()
+                    {
+                        CodigoError = 101,
+                        MensajeBitacora = ex.Message,
+                        Data = ""
+                    }
+                };
+            }
+        }
     }
 }
