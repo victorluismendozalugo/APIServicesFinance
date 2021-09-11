@@ -41,9 +41,7 @@ namespace apiServices.Modules
 
             Post("/menu", _ => Menu());
             Post("/sucursal", _ => ConsultaSucursalUsuario());
-            Post("/guardar", _ => UsuarioRegistro());
             Post("/consultar", _ => ConsultaUsuario());
-            Post("/email", _ => UsuarioEnviarEmail());
 
         }
         private object Menu()
@@ -80,50 +78,7 @@ namespace apiServices.Modules
                     }
                 });
             }
-        }
-
-        private object UsuarioRegistro()
-        {
-            try
-            {
-                //var t = this.BindToken();
-                UsuarioRegistroModel p = this.Bind();
-
-                var r = _DAUsuario.UsuarioRegistro(p);
-
-                if (r.Data.CodigoError == 0)
-                {
-                    Emailer email = new Emailer();
-                    email.EnviarEmail(p.Usuario, r.Message, p.SucursalID);
-                }
-
-                return Response.AsJson(new Result<DataModel>()
-                {
-                    Value = r.Value,
-                    Message = r.Message,
-                    Data = new DataModel()
-                    {
-                        CodigoError = r.Data.CodigoError,
-                        MensajeBitacora = r.Data.MensajeBitacora,
-                        Data = r.Data.Data
-                    }
-                });
-            }
-            catch (Exception ex)
-            {
-                return Response.AsJson(new Result<DataModel>()
-                {
-                    Value = false,
-                    Message = "Problemas al registrar el usuario",
-                    Data = new DataModel()
-                    {
-                        CodigoError = 101,
-                        MensajeBitacora = ex.Message,
-                        Data = ""
-                    }
-                });
-            }
-        }
+        }   
 
         private object ConsultaSucursalUsuario()
         {
@@ -197,48 +152,6 @@ namespace apiServices.Modules
             }
         }
 
-        private object UsuarioEnviarEmail()
-        {
-            try
-            {
-                //var t = this.BindToken();
-                UsuarioRegistroModel p = this.Bind();
-
-                var r = _DAUsuario.UsuarioEnviarEmail(p);
-
-                if (r.Data.CodigoError == 0)
-                {
-                    Emailer email = new Emailer();
-                    email.EnviarEmail(p.Usuario, r.Message, p.SucursalID);
-                }
-
-                return Response.AsJson(new Result<DataModel>()
-                {
-                    Value = r.Value,
-                    Message = r.Message,
-                    Data = new DataModel()
-                    {
-                        CodigoError = r.Data.CodigoError,
-                        MensajeBitacora = r.Data.MensajeBitacora,
-                        Data = r.Data.Data
-                    }
-                });
-            }
-            catch (Exception ex)
-            {
-                return Response.AsJson(new Result<DataModel>()
-                {
-                    Value = false,
-                    Message = "Problemas al registrar el usuario",
-                    Data = new DataModel()
-                    {
-                        CodigoError = 101,
-                        MensajeBitacora = ex.Message,
-                        Data = ""
-                    }
-                });
-            }
-        }
 
     }
 }

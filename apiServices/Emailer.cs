@@ -35,9 +35,9 @@ namespace apiServices
 
             msg.Body += "<td valign='top' align='left' width='630'>";
             msg.Body += "<div style='margin:0;outline:none;padding:0;text-align:center'>";
-            msg.Body += "<a href='http://localhost:49890/activation/user?guid=" + GUID + "&sucursal=" + sucursal + "'";
+            msg.Body += "<a href='http://kssystems-001-site8.dtempurl.com/api/activation/user?guid=" + GUID + "&sucursal=" + sucursal + "'";
             msg.Body += "style='margin:0;outline:none;padding:12px;color:#ffffff;background:#0088cc;background-color:#0088cc;border:1px solid #b5b5b5;border-radius:3px;font-family:Open Sans,Roboto,San Francisco,Helvetica,Arial,sans-serif;font-size:19px;display:inline-block;line-height:1.1;text-align:center;text-decoration:none'";
-            msg.Body += "data-saferedirecturl='http://localhost:49890/activation/user?guid=" + GUID + "&sucursal=" + sucursal + "'>";
+            msg.Body += "data-saferedirecturl='http://kssystems-001-site8.dtempurl.com/api/activation/user?guid=" + GUID + "&sucursal=" + sucursal + "'>";
             msg.Body += "<span";
             msg.Body += "style='color:#ffffff;font-family:Open Sans,Roboto,San Francisco,Helvetica,Arial,sans-serif;font-size:19px;font-weight:bold' >";
             msg.Body += "ACTIVAR MI CUENTA</span></a>";
