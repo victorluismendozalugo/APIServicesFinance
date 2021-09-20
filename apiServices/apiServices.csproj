@@ -178,6 +178,7 @@
     <Compile Include="Emailer.cs" />
     <Compile Include="Modules\AuthModule.cs" />
     <Compile Include="Modules\Documentacion.cs" />
+    <Compile Include="Modules\Notificaciones.cs" />
     <Compile Include="Modules\RootModule.cs" />
     <Compile Include="Modules\UserActivation.cs" />
     <Compile Include="Modules\Usuarios.cs" />

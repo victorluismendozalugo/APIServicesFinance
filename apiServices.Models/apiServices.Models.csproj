@@ -84,6 +84,7 @@
     <Compile Include="Catalogos\SucursalesModel.cs" />
     <Compile Include="DataModel.cs" />
     <Compile Include="Globales.cs" />
+    <Compile Include="Notificaciones\NotificacionesModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TokenResponseModel.cs" />
     <Compile Include="Usuario\UsuarioCredencialesModel.cs" />
