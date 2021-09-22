@@ -10,6 +10,7 @@ namespace apiServices.Models.Catalogos
     {
         public int UsuarioID { get; set; }
         public string Usuario { get; set; }
+        public string NombreCompleto { get; set; }
         public int SucursalID { get; set; }
         public string Identificacion { get; set; }
         public string CompDomicilio { get; set; }
@@ -19,5 +20,7 @@ namespace apiServices.Models.Catalogos
         public string ReferenciaNombre2 { get; set; }
         public string ReferenciaTelefono2 { get; set; }
         public string FechaRegistro { get; set; }
+        public int PorcentajeDoc { get; set; }
+        public int TipoUsuario { get; set; }
     }
 }
