@@ -59,6 +59,7 @@
   <ItemGroup>
     <Compile Include="DADocumentacion.cs" />
     <Compile Include="DANotificaciones.cs" />
+    <Compile Include="DASaldos.cs" />
     <Compile Include="DAUsuario.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">

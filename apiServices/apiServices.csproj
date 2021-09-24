@@ -180,6 +180,7 @@
     <Compile Include="Modules\Documentacion.cs" />
     <Compile Include="Modules\Notificaciones.cs" />
     <Compile Include="Modules\RootModule.cs" />
+    <Compile Include="Modules\Saldos.cs" />
     <Compile Include="Modules\UserActivation.cs" />
     <Compile Include="Modules\Usuarios.cs" />
     <Compile Include="NancyExtensions.cs" />
