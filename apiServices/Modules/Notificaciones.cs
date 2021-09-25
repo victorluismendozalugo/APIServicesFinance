@@ -43,6 +43,7 @@ namespace apiServices.Modules
 
             Post("/enviar", _ => EnviarNotificacion());
             Post("/consultar", _ => ConsultarNotificacion());
+            Post("/marcar", _ => MarcarNotificacion());
         }
         private object EnviarNotificacion()
         {
@@ -106,6 +107,42 @@ namespace apiServices.Modules
                 {
                     Value = false,
                     Message = "Problemas al obtener sus notificaciones",
+                    Data = new DataModel()
+                    {
+                        CodigoError = 101,
+                        MensajeBitacora = ex.Message,
+                        Data = ""
+                    }
+                });
+            }
+        }
+        private object MarcarNotificacion()
+        {
+            try
+            {
+                //var t = this.BindToken();
+                NotificacionesModel p = this.Bind();
+
+                var r = _DANotificaciones.MarcarNotificacion(p);
+
+                return Response.AsJson(new Result<DataModel>()
+                {
+                    Value = r.Value,
+                    Message = r.Message,
+                    Data = new DataModel()
+                    {
+                        CodigoError = r.Data.CodigoError,
+                        MensajeBitacora = r.Data.MensajeBitacora,
+                        Data = r.Data.Data
+                    }
+                });
+            }
+            catch (Exception ex)
+            {
+                return Response.AsJson(new Result<DataModel>()
+                {
+                    Value = false,
+                    Message = "Problemas al modificar la notificación",
                     Data = new DataModel()
                     {
                         CodigoError = 101,
