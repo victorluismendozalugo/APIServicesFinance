@@ -1,7 +1,6 @@
 ﻿using apiServices.DA;
 using apiServices.Models;
 using apiServices.Models.Usuario;
-using Microsoft.Graph;
 using Nancy;
 using Nancy.ModelBinding;
 using System;
