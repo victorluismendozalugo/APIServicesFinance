@@ -10,6 +10,10 @@ namespace apiServices.Models.Catalogos
     {
         public int UsuarioID { get; set; }
         public string Usuario { get; set; }
+        public string Nombre { get; set; }
+        public string Apaterno { get; set; }
+        public string Amaterno { get; set; }
+        public string Correo { get; set; }
         public string NombreCompleto { get; set; }
         public int SucursalID { get; set; }
         public string Identificacion { get; set; }
@@ -22,5 +26,48 @@ namespace apiServices.Models.Catalogos
         public string FechaRegistro { get; set; }
         public int PorcentajeDoc { get; set; }
         public int TipoUsuario { get; set; }
+
+        public int IDCliente { get; set; }
+        public int IDSucursal { get; set; }
+        public string DondeSeEntero { get; set; }
+        public string Genero { get; set; }
+        public string FechaNacimiento { get; set; }
+        public int Edad { get; set; }
+        public string PaisNacimiento { get; set; }
+        public string Nacionalidad { get; set; }
+        public string CURP { get; set; }
+        public string RFC { get; set; }
+        public string NivelEstudios { get; set; }
+        public string EdoCivil { get; set; }
+        public string Ocupacion { get; set; }
+        public string CalleNumero { get; set; }
+        public string Colonia { get; set; }
+        public string CodigoPostal { get; set; }
+        public string Municipio { get; set; }
+        public string Estado { get; set; }
+        public string Pais { get; set; }
+        public int TiempoVivir { get; set; }
+        public string Celular { get; set; }
+        public string TelefonoCasa { get; set; }
+        public string EntidadFederativa { get; set; }
+        public string NombreEmpresa { get; set; }
+        public string CalleNumeroEmpresa { get; set; }
+        public string ColoniaEmpresa { get; set; }
+        public string CodigoPostalEmpresa { get; set; }
+        public string MunicipioEmpresa { get; set; }
+        public string EstadoEmpresa { get; set; }
+        public string TelefonoEmpresa { get; set; }
+        public int Antiguedad { get; set; }
+        public string IngresoMensual { get; set; }
+        public string FrecuenciaPago { get; set; }
+        public string NombreConyugue { get; set; }
+        public string ApellidoPConyugue { get; set; }
+        public string ApellidoMConyugue { get; set; }
+        public string TelefonoConyugue { get; set; }
+        public string CelularConyugue { get; set; }
+        public string OcupacionConyugue { get; set; }
+        public string IngresoMensualConyugue { get; set; }
+        public string BancoCredito { get; set; }
+        public string CtaClabeTarjeta { get; set; }
     }
 }
