@@ -9,6 +9,7 @@ namespace apiServices.Models.Catalogos
     public class DocumentacionModel
     {
         public int UsuarioID { get; set; }
+        public int IDSolicitud { get; set; }
         public string Usuario { get; set; }
         public string Nombre { get; set; }
         public string Apaterno { get; set; }
