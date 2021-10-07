@@ -36,8 +36,8 @@ namespace apiServices.Models.Catalogos
         public int Edad { get; set; }
         public string PaisNacimiento { get; set; }
         public string Nacionalidad { get; set; }
-        public string CURP { get; set; }
-        public string RFC { get; set; }
+        public string curp { get; set; }
+        public string rfc { get; set; }
         public string NivelEstudios { get; set; }
         public string EdoCivil { get; set; }
         public string Ocupacion { get; set; }

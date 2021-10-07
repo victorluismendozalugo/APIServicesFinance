@@ -6,6 +6,8 @@ using Nancy.ModelBinding;
 using Nancy.Security;
 using System;
 using System.Collections.Generic;
+using System.Data;
+using System.IO;
 using System.Linq;
 using System.Web;
 using WarmPack.Classes;
@@ -155,6 +157,85 @@ namespace apiServices.Modules
                 });
             }
         }
+
+        //private object RptSolicitud()
+        //{
+        //    String b64Str;
+        //    try
+        //    {
+        //        DocumentacionModel p = this.Bind();
+
+        //        var r = _DADocumentacion.RptSolicitudDocumentacion(p.Usuario, p.SucursalID);
+
+        //        if (r.Value == false)
+        //        {
+        //            return Response.AsJson(new Result<DataModel>()
+        //            {
+        //                Value = r.Value,
+        //                Message = r.Message,
+        //                Data = new DataModel()
+        //                {
+        //                    CodigoError = r.Data.CodigoError,
+        //                    MensajeBitacora = r.Data.MensajeBitacora,
+        //                    Data = ""
+        //                }
+        //            });
+        //        }
+
+        //        DataSet ds = (DataSet)r.Data.Data;
+
+
+        //        ReportDataSource datasource = new ReportDataSource("Cabecero", ds.Tables[0]);
+
+
+        //        ReportViewer rp = new ReportViewer();
+        //        rp.ProcessingMode = ProcessingMode.Local;
+
+        //        rp.LocalReport.ReportPath = Globales.RutaApp + "FormatoReporte.rdlc";
+
+        //        rp.LocalReport.DataSources.Clear();
+        //        rp.LocalReport.DataSources.Add(datasource);
+
+
+        //        byte[] Bytes = rp.LocalReport.Render(format: "PDF", deviceInfo: "");
+
+        //        System.IO.Stream stream = new System.IO.MemoryStream(Bytes);
+
+        //        using (Stream stm = stream)
+        //        {
+        //            stm.Seek(0, SeekOrigin.Begin);
+        //            byte[] buffer = new byte[stm.Length];
+        //            stm.Read(buffer, 0, (int)stm.Length);
+        //            b64Str = Convert.ToBase64String(buffer);
+        //        }
+
+        //        return Response.AsJson(new Result<DataModel>()
+        //        {
+        //            Value = true,
+        //            Message = "Orden compra",
+        //            Data = new DataModel()
+        //            {
+        //                CodigoError = 0,
+        //                MensajeBitacora = "",
+        //                Data = b64Str
+        //            }
+        //        });
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return Response.AsJson(new Result<DataModel>()
+        //        {
+        //            Value = false,
+        //            Message = "Problemas al generar la solicitud",
+        //            Data = new DataModel()
+        //            {
+        //                CodigoError = 101,
+        //                MensajeBitacora = ex.Message,
+        //                Data = ""
+        //            }
+        //        });
+        //    }
+        //}
     }
 }
 
