@@ -76,7 +76,14 @@ namespace apiServices.DA
                 parametros.Add("@pIngresoMensualConyugue", ConexionDbType.VarChar, usuario.IngresoMensualConyugue);
                 parametros.Add("@pBancoCredito", ConexionDbType.VarChar, usuario.BancoCredito);
                 parametros.Add("@pCtaClabeTarjeta", ConexionDbType.VarChar, usuario.CtaClabeTarjeta);
-                
+
+                parametros.Add("@pReferenciaNombre3", ConexionDbType.VarChar, usuario.ReferenciaNombre3);
+                parametros.Add("@pReferenciaTelefono3", ConexionDbType.VarChar, usuario.ReferenciaTelefono3);
+                parametros.Add("@pReferenciaNombre4", ConexionDbType.VarChar, usuario.ReferenciaNombre4);
+                parametros.Add("@pReferenciaTelefono4", ConexionDbType.VarChar, usuario.ReferenciaTelefono4);
+
+                parametros.Add("@pTipoVivienda", ConexionDbType.VarChar, usuario.TipoVivienda);
+
                 parametros.Add("@pResultado", ConexionDbType.Bit, System.Data.ParameterDirection.Output);
                 parametros.Add("@pMsg", ConexionDbType.VarChar, 300, System.Data.ParameterDirection.Output, 300);
                 parametros.Add("@pCodError", ConexionDbType.Int, System.Data.ParameterDirection.Output);

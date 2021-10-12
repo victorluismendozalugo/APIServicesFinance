@@ -70,5 +70,12 @@ namespace apiServices.Models.Catalogos
         public string IngresoMensualConyugue { get; set; }
         public string BancoCredito { get; set; }
         public string CtaClabeTarjeta { get; set; }
+
+        public string ReferenciaNombre3 { get; set; }
+        public string ReferenciaTelefono3 { get; set; }
+        public string ReferenciaNombre4 { get; set; }
+        public string ReferenciaTelefono4 { get; set; }
+
+        public string TipoVivienda { get; set; }
     }
 }
