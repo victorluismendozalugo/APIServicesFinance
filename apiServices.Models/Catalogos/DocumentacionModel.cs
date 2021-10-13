@@ -77,5 +77,9 @@ namespace apiServices.Models.Catalogos
         public string ReferenciaTelefono4 { get; set; }
 
         public string TipoVivienda { get; set; }
+        public string Parentesco1 { get; set; }
+        public string Parentesco2 { get; set; }
+        public string Parentesco3 { get; set; }
+        public string Parentesco4 { get; set; }
     }
 }

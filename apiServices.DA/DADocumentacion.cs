@@ -82,6 +82,11 @@ namespace apiServices.DA
                 parametros.Add("@pReferenciaNombre4", ConexionDbType.VarChar, usuario.ReferenciaNombre4);
                 parametros.Add("@pReferenciaTelefono4", ConexionDbType.VarChar, usuario.ReferenciaTelefono4);
 
+                parametros.Add("@pParentesco1", ConexionDbType.VarChar, usuario.Parentesco1);
+                parametros.Add("@pParentesco2", ConexionDbType.VarChar, usuario.Parentesco2);
+                parametros.Add("@pParentesco3", ConexionDbType.VarChar, usuario.Parentesco3);
+                parametros.Add("@pParentesco4", ConexionDbType.VarChar, usuario.Parentesco4);
+
                 parametros.Add("@pTipoVivienda", ConexionDbType.VarChar, usuario.TipoVivienda);
 
                 parametros.Add("@pResultado", ConexionDbType.Bit, System.Data.ParameterDirection.Output);
