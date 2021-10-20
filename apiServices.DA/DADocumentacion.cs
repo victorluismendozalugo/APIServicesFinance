@@ -89,6 +89,12 @@ namespace apiServices.DA
 
                 parametros.Add("@pTipoVivienda", ConexionDbType.VarChar, usuario.TipoVivienda);
 
+                parametros.Add("@pMontoSolicitado", ConexionDbType.Int, usuario.MontoSolicitado);
+                parametros.Add("@pInteresOrdinario", ConexionDbType.Int, usuario.InteresOrdinario);
+                parametros.Add("@pTotalPagar", ConexionDbType.Int, usuario.TotalPagar);
+                parametros.Add("@pValorXpago", ConexionDbType.Int, usuario.ValorXpago);
+
+
                 parametros.Add("@pResultado", ConexionDbType.Bit, System.Data.ParameterDirection.Output);
                 parametros.Add("@pMsg", ConexionDbType.VarChar, 300, System.Data.ParameterDirection.Output, 300);
                 parametros.Add("@pCodError", ConexionDbType.Int, System.Data.ParameterDirection.Output);

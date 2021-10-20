@@ -81,5 +81,10 @@ namespace apiServices.Models.Catalogos
         public string Parentesco2 { get; set; }
         public string Parentesco3 { get; set; }
         public string Parentesco4 { get; set; }
+
+        public int MontoSolicitado { get; set; }
+        public int InteresOrdinario { get; set; }
+        public int TotalPagar { get; set; }
+        public int ValorXpago { get; set; }
     }
 }
