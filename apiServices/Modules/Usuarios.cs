@@ -42,6 +42,7 @@ namespace apiServices.Modules
             Post("/menu", _ => Menu());
             Post("/sucursal", _ => ConsultaSucursalUsuario());
             Post("/consultar", _ => ConsultaUsuario());
+            Post("/tipo", _ => TipoUsuario());
 
         }
         private object Menu()
@@ -152,6 +153,42 @@ namespace apiServices.Modules
             }
         }
 
+        private object TipoUsuario()
+        {
+            try
+            {
+                UsuarioTipoModel p = this.Bind();
 
+                var r = _DAUsuario.TipoUsuario(p.Usuario, p.Sucursal);
+
+                return Response.AsJson(new Result<DataModel>()
+                {
+                    Value = r.Value,
+                    Message = r.Message,
+                    Data = new DataModel()
+                    {
+                        CodigoError = r.Data.CodigoError,
+                        MensajeBitacora = r.Data.MensajeBitacora,
+                        Data = r.Data.Data
+                    }
+                });
+            }
+            catch (Exception ex)
+            {
+                return Response.AsJson(new Result<DataModel>()
+                {
+                    Value = false,
+                    Message = "Problemas al obtener el tipo de usuario",
+                    Data = new DataModel()
+                    {
+                        CodigoError = 101,
+                        MensajeBitacora = ex.Message,
+                        Data = ""
+                    }
+                });
+            }
+        }
+
+        
     }
 }

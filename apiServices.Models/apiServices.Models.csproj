@@ -91,6 +91,7 @@
     <Compile Include="Usuario\UsuarioCredencialesModel.cs" />
     <Compile Include="Usuario\UsuarioModel.cs" />
     <Compile Include="Usuario\UsuarioRegistroModel.cs" />
+    <Compile Include="Usuario\UsuarioTipoModel.cs" />
     <Compile Include="Usuario\UsuarioTokenRefreshModel.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
