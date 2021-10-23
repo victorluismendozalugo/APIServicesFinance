@@ -33,5 +33,7 @@ namespace apiServices.Models.Usuario
                 }
             }
         }
+        public string MotivoBaja { get; set; }
+        public string Fecha { get; set; }
     }
 }

@@ -36,13 +36,15 @@ namespace apiServices.Modules
                 }
             };
 
-             this.RequiresAuthentication();
+            this.RequiresAuthentication();
             _DAUsuario = new DAUsuario();
 
             Post("/menu", _ => Menu());
             Post("/sucursal", _ => ConsultaSucursalUsuario());
             Post("/consultar", _ => ConsultaUsuario());
             Post("/tipo", _ => TipoUsuario());
+            Post("/baja", _ => UsuarioBaja());
+            Post("/baja/consulta", _ => MotivosBajaCon());
 
         }
         private object Menu()
@@ -79,7 +81,7 @@ namespace apiServices.Modules
                     }
                 });
             }
-        }   
+        }
 
         private object ConsultaSucursalUsuario()
         {
@@ -189,6 +191,76 @@ namespace apiServices.Modules
             }
         }
 
-        
+        private object UsuarioBaja()
+        {
+            try
+            {
+                UsuarioTipoModel p = this.Bind();
+
+                var r = _DAUsuario.UsuarioBaja(p.Usuario, p.Sucursal, p.MotivoBaja);
+
+                return Response.AsJson(new Result<DataModel>()
+                {
+                    Value = r.Value,
+                    Message = r.Message,
+                    Data = new DataModel()
+                    {
+                        CodigoError = r.Data.CodigoError,
+                        MensajeBitacora = r.Data.MensajeBitacora,
+                        Data = r.Data.Data
+                    }
+                });
+            }
+            catch (Exception ex)
+            {
+                return Response.AsJson(new Result<DataModel>()
+                {
+                    Value = false,
+                    Message = "Problemas al obtener el tipo de usuario",
+                    Data = new DataModel()
+                    {
+                        CodigoError = 101,
+                        MensajeBitacora = ex.Message,
+                        Data = ""
+                    }
+                });
+            }
+        }
+
+        private object MotivosBajaCon()
+        {
+            try
+            {
+                UsuarioTipoModel p = this.Bind();
+
+                var r = _DAUsuario.MotivosBajaCon(p.Usuario, p.Sucursal);
+
+                return Response.AsJson(new Result<DataModel>()
+                {
+                    Value = r.Value,
+                    Message = r.Message,
+                    Data = new DataModel()
+                    {
+                        CodigoError = r.Data.CodigoError,
+                        MensajeBitacora = r.Data.MensajeBitacora,
+                        Data = r.Data.Data
+                    }
+                });
+            }
+            catch (Exception ex)
+            {
+                return Response.AsJson(new Result<DataModel>()
+                {
+                    Value = false,
+                    Message = "Problemas al obtener el motivo de baja",
+                    Data = new DataModel()
+                    {
+                        CodigoError = 101,
+                        MensajeBitacora = ex.Message,
+                        Data = ""
+                    }
+                });
+            }
+        }
     }
 }

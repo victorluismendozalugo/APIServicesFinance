@@ -358,5 +358,88 @@ namespace apiServices.DA
                 };
             }
         }
+
+        public Result<DataModel> UsuarioBaja(string usuario, int sucursal, string motivo)
+        {
+            var parametros = new ConexionParameters();
+            try
+            {
+                parametros.Add("@pSucursal", ConexionDbType.Int, sucursal);
+                parametros.Add("@pUsuario", ConexionDbType.VarChar, usuario);
+                parametros.Add("@pMotivoBaja", ConexionDbType.VarChar, motivo);
+                parametros.Add("@pResultado", ConexionDbType.Bit, System.Data.ParameterDirection.Output);
+                parametros.Add("@pMsg", ConexionDbType.VarChar, System.Data.ParameterDirection.Output, 300);
+                parametros.Add("@pCodError", ConexionDbType.Int, System.Data.ParameterDirection.Output);
+
+                var r = _conexion.ExecuteWithResults<UsuarioTipoModel>("procClientesBaja", parametros);
+
+                return new Result<DataModel>()
+                {
+                    Value = parametros.Value("@pResultado").ToBoolean(),
+                    Message = parametros.Value("@pMsg").ToString(),
+                    Data = new DataModel()
+                    {
+                        CodigoError = parametros.Value("@pCodError").ToInt32(),
+                        MensajeBitacora = parametros.Value("@pMsg").ToString(),
+                        Data = r.Data
+                    }
+                };
+            }
+            catch (Exception ex)
+            {
+                return new Result<DataModel>()
+                {
+                    Value = false,
+                    Message = "Problemas al dar de baja el cliente",
+                    Data = new DataModel()
+                    {
+                        CodigoError = 101,
+                        MensajeBitacora = ex.Message,
+                        Data = ""
+                    }
+                };
+            }
+        }
+
+        public Result<DataModel> MotivosBajaCon(string usuario, int sucursal)
+        {
+            var parametros = new ConexionParameters();
+            try
+            {
+                parametros.Add("@pSucursal", ConexionDbType.Int, sucursal);
+                parametros.Add("@pUsuario", ConexionDbType.VarChar, usuario);
+                parametros.Add("@pResultado", ConexionDbType.Bit, System.Data.ParameterDirection.Output);
+                parametros.Add("@pMsg", ConexionDbType.VarChar, System.Data.ParameterDirection.Output, 300);
+                parametros.Add("@pCodError", ConexionDbType.Int, System.Data.ParameterDirection.Output);
+
+                var r = _conexion.ExecuteWithResults<UsuarioTipoModel>("procMotivosBajaCon", parametros);
+
+                return new Result<DataModel>()
+                {
+                    Value = parametros.Value("@pResultado").ToBoolean(),
+                    Message = parametros.Value("@pMsg").ToString(),
+                    Data = new DataModel()
+                    {
+                        CodigoError = parametros.Value("@pCodError").ToInt32(),
+                        MensajeBitacora = parametros.Value("@pMsg").ToString(),
+                        Data = r.Data
+                    }
+                };
+            }
+            catch (Exception ex)
+            {
+                return new Result<DataModel>()
+                {
+                    Value = false,
+                    Message = "Problemas al obtener el motivo de baja del cliente",
+                    Data = new DataModel()
+                    {
+                        CodigoError = 101,
+                        MensajeBitacora = ex.Message,
+                        Data = ""
+                    }
+                };
+            }
+        }
     }
 }

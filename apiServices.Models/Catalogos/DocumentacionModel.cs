@@ -86,5 +86,7 @@ namespace apiServices.Models.Catalogos
         public int InteresOrdinario { get; set; }
         public int TotalPagar { get; set; }
         public int ValorXpago { get; set; }
+        public int TipoCliente { get; set; }
+        public string Estatus { get; set; }
     }
 }
