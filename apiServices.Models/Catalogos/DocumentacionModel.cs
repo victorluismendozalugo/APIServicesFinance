@@ -89,4 +89,11 @@ namespace apiServices.Models.Catalogos
         public int TipoCliente { get; set; }
         public string Estatus { get; set; }
     }
+
+    public class DocumentacionModel2 {
+        public string Identificacion { get; set; }
+        public string CompDomicilio { get; set; }
+        public string CompIngresos { get; set; }
+
+    }
 }

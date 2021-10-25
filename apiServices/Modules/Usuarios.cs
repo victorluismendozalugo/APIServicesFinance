@@ -44,6 +44,7 @@ namespace apiServices.Modules
             Post("/consultar", _ => ConsultaUsuario());
             Post("/tipo", _ => TipoUsuario());
             Post("/baja", _ => UsuarioBaja());
+            Post("/alta", _ => UsuarioAlta());
             Post("/baja/consulta", _ => MotivosBajaCon());
 
         }
@@ -217,6 +218,41 @@ namespace apiServices.Modules
                 {
                     Value = false,
                     Message = "Problemas al obtener el tipo de usuario",
+                    Data = new DataModel()
+                    {
+                        CodigoError = 101,
+                        MensajeBitacora = ex.Message,
+                        Data = ""
+                    }
+                });
+            }
+        }
+        private object UsuarioAlta()
+        {
+            try
+            {
+                UsuarioTipoModel p = this.Bind();
+
+                var r = _DAUsuario.UsuarioAlta(p.Usuario, p.Sucursal);
+
+                return Response.AsJson(new Result<DataModel>()
+                {
+                    Value = r.Value,
+                    Message = r.Message,
+                    Data = new DataModel()
+                    {
+                        CodigoError = r.Data.CodigoError,
+                        MensajeBitacora = r.Data.MensajeBitacora,
+                        Data = r.Data.Data
+                    }
+                });
+            }
+            catch (Exception ex)
+            {
+                return Response.AsJson(new Result<DataModel>()
+                {
+                    Value = false,
+                    Message = "Problemas al reactivar el usuario",
                     Data = new DataModel()
                     {
                         CodigoError = 101,

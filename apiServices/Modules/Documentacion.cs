@@ -47,6 +47,7 @@ namespace apiServices.Modules
             Post("/consulta", _ => ConsultaDocumentacion());
             Post("/clientes/documentacion", _ => ConsultaClientesDocumentacion());
             Post("/clientesXTipo/documentacion", _ => ConsultaClientesXTipoDocumentacion());
+            Post("/clientesXTipo/comprobantes", _ => ObtieneComprobantesCliente());
 
         }
 
@@ -166,6 +167,42 @@ namespace apiServices.Modules
                 DocumentacionModel p = this.Bind();
 
                 var r = _DADocumentacion.ConsultaClientesXTipoDocumentacion(p.Usuario, p.SucursalID, p.TipoCliente);
+
+                return Response.AsJson(new Result<DataModel>()
+                {
+                    Value = r.Value,
+                    Message = r.Message,
+                    Data = new DataModel()
+                    {
+                        CodigoError = r.Data.CodigoError,
+                        MensajeBitacora = r.Data.MensajeBitacora,
+                        Data = r.Data.Data
+                    }
+                });
+            }
+            catch (Exception ex)
+            {
+                return Response.AsJson(new Result<DataModel>()
+                {
+                    Value = false,
+                    Message = "Problemas al obtener la documentación",
+                    Data = new DataModel()
+                    {
+                        CodigoError = 101,
+                        MensajeBitacora = ex.Message,
+                        Data = ""
+                    }
+                });
+            }
+        }
+
+        private object ObtieneComprobantesCliente()
+        {
+            try
+            {
+                DocumentacionModel p = this.Bind();
+
+                var r = _DADocumentacion.ObtieneComprobantesCliente(p.Usuario, p.SucursalID);
 
                 return Response.AsJson(new Result<DataModel>()
                 {
