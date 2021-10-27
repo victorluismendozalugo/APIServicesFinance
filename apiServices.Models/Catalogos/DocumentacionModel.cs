@@ -88,6 +88,29 @@ namespace apiServices.Models.Catalogos
         public int ValorXpago { get; set; }
         public int TipoCliente { get; set; }
         public string Estatus { get; set; }
+
+        public string EstatusNombre
+        {
+
+            get
+            {
+                switch (Estatus)
+                {
+                    case "A":
+                        return "PROSPECTO";
+
+                    case "T":
+                        return "AUTORIZADO";
+
+                    case "B":
+                        return "INACTIVO";
+
+                    default:
+                        return "";
+
+                }
+            }
+        }
     }
 
     public class DocumentacionModel2 {

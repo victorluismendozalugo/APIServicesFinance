@@ -45,7 +45,9 @@ namespace apiServices.Modules
             Post("/tipo", _ => TipoUsuario());
             Post("/baja", _ => UsuarioBaja());
             Post("/alta", _ => UsuarioAlta());
+            Post("/autorizar", _ => CreditoAutorizar());
             Post("/baja/consulta", _ => MotivosBajaCon());
+            Post("/credito/consulta", _ => UsuarioCreditoAutorizadoCon());
 
         }
         private object Menu()
@@ -289,6 +291,77 @@ namespace apiServices.Modules
                 {
                     Value = false,
                     Message = "Problemas al obtener el motivo de baja",
+                    Data = new DataModel()
+                    {
+                        CodigoError = 101,
+                        MensajeBitacora = ex.Message,
+                        Data = ""
+                    }
+                });
+            }
+        }
+
+        private object CreditoAutorizar()
+        {
+            try
+            {
+                UsuarioTipoModel p = this.Bind();
+
+                var r = _DAUsuario.CreditoAutorizar(p.Usuario, p.Sucursal, p.MontoAutorizado, p.Responsable);
+
+                return Response.AsJson(new Result<DataModel>()
+                {
+                    Value = r.Value,
+                    Message = r.Message,
+                    Data = new DataModel()
+                    {
+                        CodigoError = r.Data.CodigoError,
+                        MensajeBitacora = r.Data.MensajeBitacora,
+                        Data = r.Data.Data
+                    }
+                });
+            }
+            catch (Exception ex)
+            {
+                return Response.AsJson(new Result<DataModel>()
+                {
+                    Value = false,
+                    Message = "Problemas al autorizar",
+                    Data = new DataModel()
+                    {
+                        CodigoError = 101,
+                        MensajeBitacora = ex.Message,
+                        Data = ""
+                    }
+                });
+            }
+        }
+        private object UsuarioCreditoAutorizadoCon()
+        {
+            try
+            {
+                UsuarioTipoModel p = this.Bind();
+
+                var r = _DAUsuario.UsuarioCreditoAutorizadoCon(p.Usuario, p.Sucursal);
+
+                return Response.AsJson(new Result<DataModel>()
+                {
+                    Value = r.Value,
+                    Message = r.Message,
+                    Data = new DataModel()
+                    {
+                        CodigoError = r.Data.CodigoError,
+                        MensajeBitacora = r.Data.MensajeBitacora,
+                        Data = r.Data.Data
+                    }
+                });
+            }
+            catch (Exception ex)
+            {
+                return Response.AsJson(new Result<DataModel>()
+                {
+                    Value = false,
+                    Message = "Problemas al obtener el detalle",
                     Data = new DataModel()
                     {
                         CodigoError = 101,

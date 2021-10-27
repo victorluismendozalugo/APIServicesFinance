@@ -481,5 +481,89 @@ namespace apiServices.DA
                 };
             }
         }
+
+        public Result<DataModel> CreditoAutorizar(string usuario, int sucursal, int monto, string responsable)
+        {
+            var parametros = new ConexionParameters();
+            try
+            {
+                parametros.Add("@pSucursal", ConexionDbType.Int, sucursal);
+                parametros.Add("@pUsuario", ConexionDbType.VarChar, usuario);
+                parametros.Add("@pMontoAutorizado", ConexionDbType.Int, monto);
+                parametros.Add("@pResponsable", ConexionDbType.VarChar, responsable);
+                parametros.Add("@pResultado", ConexionDbType.Bit, System.Data.ParameterDirection.Output);
+                parametros.Add("@pMsg", ConexionDbType.VarChar, System.Data.ParameterDirection.Output, 300);
+                parametros.Add("@pCodError", ConexionDbType.Int, System.Data.ParameterDirection.Output);
+
+                var r = _conexion.ExecuteWithResults<UsuarioTipoModel>("procClientesAutorizar", parametros);
+
+                return new Result<DataModel>()
+                {
+                    Value = parametros.Value("@pResultado").ToBoolean(),
+                    Message = parametros.Value("@pMsg").ToString(),
+                    Data = new DataModel()
+                    {
+                        CodigoError = parametros.Value("@pCodError").ToInt32(),
+                        MensajeBitacora = parametros.Value("@pMsg").ToString(),
+                        Data = r.Data
+                    }
+                };
+            }
+            catch (Exception ex)
+            {
+                return new Result<DataModel>()
+                {
+                    Value = false,
+                    Message = "Problemas al autorizar",
+                    Data = new DataModel()
+                    {
+                        CodigoError = 101,
+                        MensajeBitacora = ex.Message,
+                        Data = ""
+                    }
+                };
+            }
+        }
+
+        public Result<DataModel> UsuarioCreditoAutorizadoCon(string usuario, int sucursal)
+        {
+            var parametros = new ConexionParameters();
+            try
+            {
+                parametros.Add("@pSucursal", ConexionDbType.Int, sucursal);
+                parametros.Add("@pUsuario", ConexionDbType.VarChar, usuario);
+                parametros.Add("@pResultado", ConexionDbType.Bit, System.Data.ParameterDirection.Output);
+                parametros.Add("@pMsg", ConexionDbType.VarChar, System.Data.ParameterDirection.Output, 300);
+                parametros.Add("@pCodError", ConexionDbType.Int, System.Data.ParameterDirection.Output);
+
+                var r = _conexion.ExecuteWithResults<UsuarioTipoModel>("procClientesCreditoCon", parametros);
+
+                return new Result<DataModel>()
+                {
+                    Value = parametros.Value("@pResultado").ToBoolean(),
+                    Message = parametros.Value("@pMsg").ToString(),
+                    Data = new DataModel()
+                    {
+                        CodigoError = parametros.Value("@pCodError").ToInt32(),
+                        MensajeBitacora = parametros.Value("@pMsg").ToString(),
+                        Data = r.Data
+                    }
+                };
+            }
+            catch (Exception ex)
+            {
+                return new Result<DataModel>()
+                {
+                    Value = false,
+                    Message = "Problemas al obtener el detalle del crédito",
+                    Data = new DataModel()
+                    {
+                        CodigoError = 101,
+                        MensajeBitacora = ex.Message,
+                        Data = ""
+                    }
+                };
+            }
+        }
     }
 }
