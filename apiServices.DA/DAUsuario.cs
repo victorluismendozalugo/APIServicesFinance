@@ -122,6 +122,7 @@ namespace apiServices.DA
                 parametros.Add("@pRequiereToken", ConexionDbType.Bit, usuario.RequiereToken);
                 parametros.Add("@pSucursal", ConexionDbType.Int, usuario.SucursalID);
                 parametros.Add("@pRolID", ConexionDbType.Int, usuario.RolID);
+                parametros.Add("@pCurp", ConexionDbType.VarChar, usuario.Curp);
                 parametros.Add("@pResultado", ConexionDbType.Bit, System.Data.ParameterDirection.Output);
                 parametros.Add("@pMsg", ConexionDbType.VarChar, 300, System.Data.ParameterDirection.Output, 300);
                 parametros.Add("@pCodError", ConexionDbType.Int, System.Data.ParameterDirection.Output);

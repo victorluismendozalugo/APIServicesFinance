@@ -18,6 +18,7 @@
         public string Salt { get; set; }
         public string Contrasena { get; set; }
         public string NombreCompleto { get; set; }
+        public string Curp { get; set; }
         public int SucursalID { get; set; }
         public int RolID { get; set; }
     }
