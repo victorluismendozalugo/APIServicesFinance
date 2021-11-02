@@ -90,6 +90,7 @@
     <Compile Include="TokenResponseModel.cs" />
     <Compile Include="Usuario\UsuarioCredencialesModel.cs" />
     <Compile Include="Usuario\UsuarioModel.cs" />
+    <Compile Include="Usuario\UsuarioOperacionSupervizadaModel.cs" />
     <Compile Include="Usuario\UsuarioRegistroModel.cs" />
     <Compile Include="Usuario\UsuarioTipoModel.cs" />
     <Compile Include="Usuario\UsuarioTokenRefreshModel.cs" />

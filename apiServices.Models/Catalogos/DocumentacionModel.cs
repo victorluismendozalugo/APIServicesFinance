@@ -103,8 +103,10 @@ namespace apiServices.Models.Catalogos
                         return "AUTORIZADO";
 
                     case "B":
-                        return "INACTIVO";
+                          return "INACTIVO";
 
+                    case "D":
+                        return "DISPERSADO";
                     default:
                         return "";
 

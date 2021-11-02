@@ -42,6 +42,7 @@ namespace apiServices.Modules
 
             Get("/user", _ => activarUsuario());
             Post("/guardar", _ => UsuarioRegistro());
+            Post("/usersincorreo", _ => UsuarioRegistroSCorreo());
             Post("/email", _ => UsuarioEnviarEmail());
 
             //Get("/user", _ => "Received GET request");
@@ -63,6 +64,42 @@ namespace apiServices.Modules
             }
         }
 
+        private object UsuarioRegistroSCorreo()
+        {
+            try
+            {
+                //var t = this.BindToken();
+                UsuarioRegistroModel p = this.Bind();
+
+                var r = _DAUsuario.UsuarioRegistroSCorreo(p);
+
+                return Response.AsJson(new Result<DataModel>()
+                {
+                    Value = r.Value,
+                    Message = r.Message,
+                    Data = new DataModel()
+                    {
+                        CodigoError = r.Data.CodigoError,
+                        MensajeBitacora = r.Data.MensajeBitacora,
+                        Data = r.Data.Data
+                    }
+                });
+            }
+            catch (Exception ex)
+            {
+                return Response.AsJson(new Result<DataModel>()
+                {
+                    Value = false,
+                    Message = "Problemas al registrar el usuario",
+                    Data = new DataModel()
+                    {
+                        CodigoError = 101,
+                        MensajeBitacora = ex.Message,
+                        Data = ""
+                    }
+                });
+            }
+        }
         private object UsuarioRegistro()
         {
             try

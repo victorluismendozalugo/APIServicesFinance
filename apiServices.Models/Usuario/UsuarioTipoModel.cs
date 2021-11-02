@@ -37,5 +37,6 @@ namespace apiServices.Models.Usuario
         public string Fecha { get; set; }
         public int MontoAutorizado { get; set; }
         public string Responsable { get; set; }
+        public string FechaDeposito { get; set; }
     }
 }

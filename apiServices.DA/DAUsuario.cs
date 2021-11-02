@@ -157,6 +157,60 @@ namespace apiServices.DA
             }
         }
 
+        public Result<DataModel> UsuarioRegistroSCorreo(UsuarioRegistroModel usuario)
+        {
+            var parametros = new ConexionParameters();
+            //var xml = usaurio.ToXml("root");
+            try
+            {
+                parametros.Add("@pUsuarioID", ConexionDbType.Int, usuario.IDUsuario);
+                parametros.Add("@pUsuario", ConexionDbType.VarChar, usuario.Usuario);
+                parametros.Add("@pPrimerApellido", ConexionDbType.VarChar, usuario.PrimerApellido);
+                parametros.Add("@pSegundoApellido", ConexionDbType.VarChar, usuario.SegundoApellido);
+                parametros.Add("@pNombre", ConexionDbType.VarChar, usuario.Nombre);
+                parametros.Add("@pPassword", ConexionDbType.VarChar, usuario.Contrasena);
+                parametros.Add("@pFechaTermino", ConexionDbType.VarChar, usuario.FechaTermino);
+                parametros.Add("@pQuienAutoriza", ConexionDbType.Int, usuario.QuienAutoriza);
+                parametros.Add("@pCorreo", ConexionDbType.VarChar, usuario.Correo);
+                parametros.Add("@pCelular", ConexionDbType.VarChar, usuario.Celular);
+                parametros.Add("@pRequiereToken", ConexionDbType.Bit, usuario.RequiereToken);
+                parametros.Add("@pSucursal", ConexionDbType.Int, usuario.SucursalID);
+                parametros.Add("@pRolID", ConexionDbType.Int, usuario.RolID);
+                parametros.Add("@pCurp", ConexionDbType.VarChar, usuario.Curp);
+                parametros.Add("@pResultado", ConexionDbType.Bit, System.Data.ParameterDirection.Output);
+                parametros.Add("@pMsg", ConexionDbType.VarChar, 300, System.Data.ParameterDirection.Output, 300);
+                parametros.Add("@pCodError", ConexionDbType.Int, System.Data.ParameterDirection.Output);
+
+                var r = _conexion.Execute("procUsuariosAddSinCorreo", parametros);
+
+                return new Result<DataModel>()
+                {
+                    Value = parametros.Value("@pResultado").ToBoolean(),
+                    Message = parametros.Value("@pMsg").ToString(),
+                    Data = new DataModel()
+                    {
+                        CodigoError = parametros.Value("@pCodError").ToInt32(),
+                        MensajeBitacora = parametros.Value("@pMsg").ToString(),
+                        Data = r.Data
+                    }
+                };
+            }
+            catch (Exception ex)
+            {
+                return new Result<DataModel>()
+                {
+                    Value = false,
+                    Message = "Problemas al registrar el usuario",
+                    Data = new DataModel()
+                    {
+                        CodigoError = 101,
+                        MensajeBitacora = ex.Message,
+                        Data = ""
+                    }
+                };
+            }
+        }
+
         public Result<DataModel> ConsultaMenu(string usuario)
         {
             var parametros = new ConexionParameters();
@@ -526,6 +580,50 @@ namespace apiServices.DA
             }
         }
 
+        public Result<DataModel> UsuarioDispersar(string usuario, int sucursal, string fechaDeposito, string responsable)
+        {
+            var parametros = new ConexionParameters();
+            try
+            {
+                parametros.Add("@pSucursal", ConexionDbType.Int, sucursal);
+                parametros.Add("@pUsuario", ConexionDbType.VarChar, usuario);
+                parametros.Add("@pResponsable", ConexionDbType.VarChar, responsable);
+                parametros.Add("@pFechaDeposito", ConexionDbType.VarChar, fechaDeposito);
+
+                parametros.Add("@pResultado", ConexionDbType.Bit, System.Data.ParameterDirection.Output);
+                parametros.Add("@pMsg", ConexionDbType.VarChar, System.Data.ParameterDirection.Output, 300);
+                parametros.Add("@pCodError", ConexionDbType.Int, System.Data.ParameterDirection.Output);
+
+                var r = _conexion.ExecuteWithResults<UsuarioTipoModel>("procClientesDispersar", parametros);
+
+                return new Result<DataModel>()
+                {
+                    Value = parametros.Value("@pResultado").ToBoolean(),
+                    Message = parametros.Value("@pMsg").ToString(),
+                    Data = new DataModel()
+                    {
+                        CodigoError = parametros.Value("@pCodError").ToInt32(),
+                        MensajeBitacora = parametros.Value("@pMsg").ToString(),
+                        Data = r.Data
+                    }
+                };
+            }
+            catch (Exception ex)
+            {
+                return new Result<DataModel>()
+                {
+                    Value = false,
+                    Message = "Problemas al dispersar",
+                    Data = new DataModel()
+                    {
+                        CodigoError = 101,
+                        MensajeBitacora = ex.Message,
+                        Data = ""
+                    }
+                };
+            }
+        }
+
         public Result<DataModel> UsuarioCreditoAutorizadoCon(string usuario, int sucursal)
         {
             var parametros = new ConexionParameters();
@@ -557,6 +655,53 @@ namespace apiServices.DA
                 {
                     Value = false,
                     Message = "Problemas al obtener el detalle del crédito",
+                    Data = new DataModel()
+                    {
+                        CodigoError = 101,
+                        MensajeBitacora = ex.Message,
+                        Data = ""
+                    }
+                };
+            }
+        }
+
+        public Result<DataModel> AutorizarOpSupervizada(string Autorizador, int sucursal, string responsable, string operacion, string password, string cliente)
+        {
+            var parametros = new ConexionParameters();
+            try
+            {
+
+                parametros.Add("@pUsuario", ConexionDbType.VarChar, Autorizador);
+                parametros.Add("@pPassword", ConexionDbType.VarChar, password);
+                parametros.Add("@pOperacion", ConexionDbType.VarChar, operacion);
+                parametros.Add("@pResponsable", ConexionDbType.VarChar, responsable);
+                parametros.Add("@pSucursal", ConexionDbType.Int, sucursal);
+                parametros.Add("@pCliente", ConexionDbType.VarChar, cliente);
+
+                parametros.Add("@pResultado", ConexionDbType.Bit, System.Data.ParameterDirection.Output);
+                parametros.Add("@pMsg", ConexionDbType.VarChar, System.Data.ParameterDirection.Output, 300);
+                parametros.Add("@pCodError", ConexionDbType.Int, System.Data.ParameterDirection.Output);
+
+                var r = _conexion.ExecuteWithResults<UsuarioOperacionSupervizadaModel>("procUsuariosOpSupervizada", parametros);
+
+                return new Result<DataModel>()
+                {
+                    Value = parametros.Value("@pResultado").ToBoolean(),
+                    Message = parametros.Value("@pMsg").ToString(),
+                    Data = new DataModel()
+                    {
+                        CodigoError = parametros.Value("@pCodError").ToInt32(),
+                        MensajeBitacora = parametros.Value("@pMsg").ToString(),
+                        Data = r.Data
+                    }
+                };
+            }
+            catch (Exception ex)
+            {
+                return new Result<DataModel>()
+                {
+                    Value = false,
+                    Message = "Problemas al autorizar",
                     Data = new DataModel()
                     {
                         CodigoError = 101,

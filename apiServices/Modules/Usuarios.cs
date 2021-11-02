@@ -46,8 +46,10 @@ namespace apiServices.Modules
             Post("/baja", _ => UsuarioBaja());
             Post("/alta", _ => UsuarioAlta());
             Post("/autorizar", _ => CreditoAutorizar());
+            Post("/dispersar", _ => UsuarioDispersar());
             Post("/baja/consulta", _ => MotivosBajaCon());
             Post("/credito/consulta", _ => UsuarioCreditoAutorizadoCon());
+            Post("/op/autorizar", _ => AutorizarOPsuvervizada());
 
         }
         private object Menu()
@@ -85,7 +87,6 @@ namespace apiServices.Modules
                 });
             }
         }
-
         private object ConsultaSucursalUsuario()
         {
             try
@@ -121,7 +122,6 @@ namespace apiServices.Modules
                 });
             }
         }
-
         private object ConsultaUsuario()
         {
             try
@@ -157,7 +157,6 @@ namespace apiServices.Modules
                 });
             }
         }
-
         private object TipoUsuario()
         {
             try
@@ -193,7 +192,6 @@ namespace apiServices.Modules
                 });
             }
         }
-
         private object UsuarioBaja()
         {
             try
@@ -264,7 +262,6 @@ namespace apiServices.Modules
                 });
             }
         }
-
         private object MotivosBajaCon()
         {
             try
@@ -300,7 +297,6 @@ namespace apiServices.Modules
                 });
             }
         }
-
         private object CreditoAutorizar()
         {
             try
@@ -336,6 +332,41 @@ namespace apiServices.Modules
                 });
             }
         }
+        private object UsuarioDispersar()
+        {
+            try
+            {
+                UsuarioTipoModel p = this.Bind();
+
+                var r = _DAUsuario.UsuarioDispersar(p.Usuario, p.Sucursal, p.FechaDeposito, p.Responsable);
+
+                return Response.AsJson(new Result<DataModel>()
+                {
+                    Value = r.Value,
+                    Message = r.Message,
+                    Data = new DataModel()
+                    {
+                        CodigoError = r.Data.CodigoError,
+                        MensajeBitacora = r.Data.MensajeBitacora,
+                        Data = r.Data.Data
+                    }
+                });
+            }
+            catch (Exception ex)
+            {
+                return Response.AsJson(new Result<DataModel>()
+                {
+                    Value = false,
+                    Message = "Problemas al dispersar",
+                    Data = new DataModel()
+                    {
+                        CodigoError = 101,
+                        MensajeBitacora = ex.Message,
+                        Data = ""
+                    }
+                });
+            }
+        }
         private object UsuarioCreditoAutorizadoCon()
         {
             try
@@ -362,6 +393,41 @@ namespace apiServices.Modules
                 {
                     Value = false,
                     Message = "Problemas al obtener el detalle",
+                    Data = new DataModel()
+                    {
+                        CodigoError = 101,
+                        MensajeBitacora = ex.Message,
+                        Data = ""
+                    }
+                });
+            }
+        }
+        private object AutorizarOPsuvervizada()
+        {
+            try
+            {
+                UsuarioOperacionSupervizadaModel p = this.Bind();
+
+                var r = _DAUsuario.AutorizarOpSupervizada(p.Autorizador, p.Sucursal, p.Responsable, p.Operacion, p.Password, p.Cliente);
+
+                return Response.AsJson(new Result<DataModel>()
+                {
+                    Value = r.Value,
+                    Message = r.Message,
+                    Data = new DataModel()
+                    {
+                        CodigoError = r.Data.CodigoError,
+                        MensajeBitacora = r.Data.MensajeBitacora,
+                        Data = r.Data.Data
+                    }
+                });
+            }
+            catch (Exception ex)
+            {
+                return Response.AsJson(new Result<DataModel>()
+                {
+                    Value = false,
+                    Message = "Problemas al autorizar",
                     Data = new DataModel()
                     {
                         CodigoError = 101,
