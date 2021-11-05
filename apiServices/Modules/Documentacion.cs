@@ -44,6 +44,7 @@ namespace apiServices.Modules
             Post("/clientes/documentacion", _ => ConsultaClientesDocumentacion());
             Post("/clientesXTipo/documentacion", _ => ConsultaClientesXTipoDocumentacion());
             Post("/clientesXTipo/comprobantes", _ => ObtieneComprobantesCliente());
+            Post("/solicitudes/guardar", _ => SolicitudesGuardar());
 
         }
 
@@ -218,6 +219,43 @@ namespace apiServices.Modules
                 {
                     Value = false,
                     Message = "Problemas al obtener la documentación",
+                    Data = new DataModel()
+                    {
+                        CodigoError = 101,
+                        MensajeBitacora = ex.Message,
+                        Data = ""
+                    }
+                });
+            }
+        }
+
+        private object SolicitudesGuardar()
+        {
+            try
+            {
+                //var t = this.BindToken();
+                SolicitudesModel p = this.Bind();
+
+                var r = _DADocumentacion.SolicitudesGuardar(p);
+
+                return Response.AsJson(new Result<DataModel>()
+                {
+                    Value = r.Value,
+                    Message = r.Message,
+                    Data = new DataModel()
+                    {
+                        CodigoError = r.Data.CodigoError,
+                        MensajeBitacora = r.Data.MensajeBitacora,
+                        Data = r.Data.Data
+                    }
+                });
+            }
+            catch (Exception ex)
+            {
+                return Response.AsJson(new Result<DataModel>()
+                {
+                    Value = false,
+                    Message = "Problemas al registrar la solicitud",
                     Data = new DataModel()
                     {
                         CodigoError = 101,
