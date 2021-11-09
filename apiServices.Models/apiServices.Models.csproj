@@ -84,6 +84,7 @@
     <Compile Include="Catalogos\SaldosModel.cs" />
     <Compile Include="Catalogos\SolicitudesModel.cs" />
     <Compile Include="Catalogos\SucursalesModel.cs" />
+    <Compile Include="Creditos\CreditosModel.cs" />
     <Compile Include="DataModel.cs" />
     <Compile Include="Globales.cs" />
     <Compile Include="Notificaciones\NotificacionesModel.cs" />

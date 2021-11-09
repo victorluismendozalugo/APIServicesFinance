@@ -57,6 +57,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DACreditos.cs" />
     <Compile Include="DADocumentacion.cs" />
     <Compile Include="DANotificaciones.cs" />
     <Compile Include="DASaldos.cs" />
