@@ -159,6 +159,7 @@
     <Compile Include="DynamicModelBinder.cs" />
     <Compile Include="Emailer.cs" />
     <Compile Include="Modules\AuthModule.cs" />
+    <Compile Include="Modules\Creditos.cs" />
     <Compile Include="Modules\Documentacion.cs" />
     <Compile Include="Modules\Notificaciones.cs" />
     <Compile Include="Modules\RootModule.cs" />

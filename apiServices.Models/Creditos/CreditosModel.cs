@@ -18,8 +18,8 @@ namespace apiServices.Models.Creditos
         public string FechaDeposito { get; set; }
         public string Estatus { get; set; }
         public string Responsable { get; set; }
-        public double MontoAbonado { get; set; }
+        public decimal MontoAbonado { get; set; }
         public int NumeroAbono { get; set; }
-        public double FechaAbono { get; set; }
+        public string FechaAbono { get; set; }
     }
 }
