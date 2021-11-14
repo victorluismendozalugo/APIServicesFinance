@@ -50,6 +50,7 @@ namespace apiServices.Modules
             Post("/baja/consulta", _ => MotivosBajaCon());
             Post("/credito/consulta", _ => UsuarioCreditoAutorizadoCon());
             Post("/op/autorizar", _ => AutorizarOPsuvervizada());
+            Post("/reporte", _ => UsuariosReporte());
 
         }
         private object Menu()
@@ -428,6 +429,41 @@ namespace apiServices.Modules
                 {
                     Value = false,
                     Message = "Problemas al autorizar",
+                    Data = new DataModel()
+                    {
+                        CodigoError = 101,
+                        MensajeBitacora = ex.Message,
+                        Data = ""
+                    }
+                });
+            }
+        }
+        private object UsuariosReporte()
+        {
+            try
+            {
+                ReporteModel p = this.Bind();
+
+                var r = _DAUsuario.UsuariosReporte(p);
+
+                return Response.AsJson(new Result<DataModel>()
+                {
+                    Value = r.Value,
+                    Message = r.Message,
+                    Data = new DataModel()
+                    {
+                        CodigoError = r.Data.CodigoError,
+                        MensajeBitacora = r.Data.MensajeBitacora,
+                        Data = r.Data.Data
+                    }
+                });
+            }
+            catch (Exception ex)
+            {
+                return Response.AsJson(new Result<DataModel>()
+                {
+                    Value = false,
+                    Message = "Problemas al obtener el listado de usuarios",
                     Data = new DataModel()
                     {
                         CodigoError = 101,
