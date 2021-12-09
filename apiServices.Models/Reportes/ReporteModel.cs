@@ -73,6 +73,7 @@ namespace apiServices.Models
                 }
             }
         }
+        public string Verificador { get; set; }
 
     }
 }
