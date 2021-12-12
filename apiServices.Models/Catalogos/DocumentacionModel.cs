@@ -113,7 +113,7 @@ namespace apiServices.Models.Catalogos
                 }
             }
         }
-        public string Verificador { get; set; }
+        public int Verificador { get; set; }
     }
 
     public class DocumentacionModel2 {

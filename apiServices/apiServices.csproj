@@ -166,6 +166,7 @@
     <Compile Include="Modules\Saldos.cs" />
     <Compile Include="Modules\UserActivation.cs" />
     <Compile Include="Modules\Usuarios.cs" />
+    <Compile Include="Modules\Verificadores.cs" />
     <Compile Include="NancyExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
