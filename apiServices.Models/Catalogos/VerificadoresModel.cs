@@ -39,6 +39,7 @@ namespace apiServices.Models.Catalogos
         public string FechaAabonar { get; set; }
         public string FechaAbono { get; set; }
         public decimal MontoAbonado { get; set; }
+        public decimal SaldoRestante { get; set; }
 
     }
 }
