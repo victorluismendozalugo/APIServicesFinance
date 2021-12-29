@@ -40,6 +40,9 @@ namespace apiServices.Models.Catalogos
         public string FechaAbono { get; set; }
         public decimal MontoAbonado { get; set; }
         public decimal SaldoRestante { get; set; }
+        public decimal SaldoCliente { get; set; }
+        public decimal PagoRequerido { get; set; }
+        public decimal Vencido { get; set; }
 
     }
 }
