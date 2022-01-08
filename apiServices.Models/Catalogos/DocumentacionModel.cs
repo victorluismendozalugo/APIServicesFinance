@@ -114,6 +114,7 @@ namespace apiServices.Models.Catalogos
             }
         }
         public int Verificador { get; set; }
+        public int NumeroPagos { get; set; }
     }
 
     public class DocumentacionModel2 {

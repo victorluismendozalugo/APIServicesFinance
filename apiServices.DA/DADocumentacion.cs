@@ -95,6 +95,7 @@ namespace apiServices.DA
                 parametros.Add("@pValorXpago", ConexionDbType.Int, usuario.ValorXpago);
 
                 parametros.Add("@pVerificador", ConexionDbType.Int, usuario.Verificador);
+                parametros.Add("@pNumeroPagos", ConexionDbType.Int, usuario.NumeroPagos);
 
 
                 parametros.Add("@pResultado", ConexionDbType.Bit, System.Data.ParameterDirection.Output);
