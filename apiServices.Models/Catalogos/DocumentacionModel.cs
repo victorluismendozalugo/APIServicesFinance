@@ -113,6 +113,7 @@ namespace apiServices.Models.Catalogos
                 }
             }
         }
+        public string ImagenFirma { get; set; }
         public int Verificador { get; set; }
         public int NumeroPagos { get; set; }
     }
