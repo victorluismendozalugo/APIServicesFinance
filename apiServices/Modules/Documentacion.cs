@@ -7,6 +7,7 @@ using Nancy.Security;
 using System;
 using System.Linq;
 using WarmPack.Classes;
+using IronPdf;
 
 namespace apiServices.Modules
 {
@@ -302,6 +303,7 @@ namespace apiServices.Modules
                 });
             }
         }
+
 
         //private object RptSolicitud()
         //{
